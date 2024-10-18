@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Binary Search</title>
+</head>
+<body>
+   
+    <div style="display: flex; flex-direction: column; align-items: center; margin: 10px;">
+
+        <p style="width: 200px; height: 40px; margin: 10px; border: 1px solid black; color: white; background-color: black; 
+           padding: 10px; text-align: center;" id="index">Index</p>
+    
+        <input style="width: 200px; height: 40px; margin: 10px; padding: 10px;" id="target" 
+               placeholder="Enter Target Value" type="text" class="input1" />
+    
+        <div style="display: flex; flex-direction: column; align-items: center; width: 200px;">
+            <input style="width: 200px; height: 40px; margin: 10px; padding: 10px;" id="arr" 
+                   placeholder="Enter Array Values" type="text" class="input2"/>
+            <p style="font-size: 14px; text-align: center;">Example Array: 7,3,1,15,9,11,17,19,5,13</p>
+            <p style="font-size: 14px; text-align: center;">Index: 0,1,2,3,4,5,6,7,8,9</p>
+        </div>        
+    
+        <button style="width: 220px; height: 40px; margin: 10px; padding: 10px;" 
+                onclick="binarySearch()">Find Binary Search Value</button>
+    </div>
+    
+    <script>
+        function binarySearch() {
+            const arrInput = document.getElementById('arr').value.trim().split(',').map(Number);
+            const targetInput = parseInt(document.getElementById('target').value);
+            const indexElement = document.getElementById('index');
+
+            console.log('arrInput', arrInput);
+            console.log('targetInput', targetInput);
+            console.log('indexElement', indexElement);
+
+            if (isNaN(targetInput) || !indexElement) {
+                console.error("Target or index element not found or not a valid number.");
+                alert("Target or index element not found or not a valid number.")
+                return;
+            }
+
+            console.log('arrInput', arrInput);
+
+            let left = 0;
+            let right = arrInput.length - 1;
+
+            while (left <= right) {
+                let mid = Math.floor(left + (right - left) / 2);
+                if (arrInput[mid] === targetInput) {
+                    indexElement.textContent = `Index: ${mid}`;
+                    console.log('mid', mid);
+                    return;
+                } else if (arrInput[mid] < targetInput) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+
+            indexElement.textContent = 'Target not found';
+        }
+    </script>
+</body>
+</html>
+
